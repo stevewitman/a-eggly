@@ -1,7 +1,7 @@
 angular.module('categories', [
   'eggly.models.categories'
 ])
-.config(function($stateProvider){
+  .config(function($stateProvider){
     $stateProvider
       .state('eggly.categories', {
         url: '/',
@@ -16,6 +16,9 @@ angular.module('categories', [
   })
   .controller('CategoriesListCtrl', function CategoriesCtrl(CategoriesModel){
     var categoriesListCtrl = this;
-    categoriesListCtrl.categories = CategoriesModel.getCategories();
+    CategoriesModel.getCategories()
+    .then(function(result) {
+      categoriesListCtrl.categories = result;
+    });
   })
 ;

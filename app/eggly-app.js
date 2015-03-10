@@ -3,18 +3,18 @@ angular.module('Eggly', [
     'categories',
     'categories.bookmarks'
 ])
-.config(function ($stateProvider, $urlRouterProvider) {
-    $stateProvider
-        .state('eggly', {
-            url: '',
-            abstract: true
-        })
-    ;
-    $urlRouterProvider.otherwise('/');
-})
+    .config(function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('eggly', {
+                url: '',
+                abstract: true
+            })
+        ;
+
+        $urlRouterProvider.otherwise('/');
+    })
 
 .controller('MainCtrl', function($scope, $state) {
-
 
 
     $scope.currentCategory  = null;
