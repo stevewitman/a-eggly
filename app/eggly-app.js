@@ -1,7 +1,19 @@
 angular.module('Eggly', [
-
+    'ui.router',
+    'categories',
+    'categories.bookmarks'
 ])
-.controller('MainCtrl', function($scope) {
+.config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+        .state('eggly', {
+            url: '',
+            abstract: true
+        })
+    ;
+    $urlRouterProvider.otherwise('/');
+})
+
+.controller('MainCtrl', function($scope, $state) {
     $scope.categories = [
       {"id": 0, name: "Forecasts"},
       {"id": 1, name: "SnowReports"},
@@ -22,6 +34,8 @@ angular.module('Eggly', [
 
     function setCurrentCategory(category) {
       $scope.currentCategory = category;
+
+      // $state.go('eggly.categories.bookmarks', {category:category.name});
 
       cancelCreating();
       cancelEditing();
@@ -80,8 +94,8 @@ angular.module('Eggly', [
     $scope.isSelectedBookmark = isSelectedBookmark;
 
     function deleteBookmark(bookmark) {
-      _.remove($scope.bookmarks, function(b) {
-        return b.id == bookmark.id
+      _.remove($scope.bookmarks, function (b) {
+        return b.id == bookmark.id;
       });
     }
 
@@ -110,6 +124,7 @@ angular.module('Eggly', [
 
     function cancelEditing() {
       $scope.isEditing = false;
+      $scope.editedBookmark = null;
     }
 
     function shouldShowCreating() {
